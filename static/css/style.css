@@ -1,0 +1,103 @@
+/* Define common colors and values as variables */
+:root {
+  --primary-bg-color: #333;
+  --primary-text-color: #FFF;
+  --button-bg-color: #007BFF;
+  --button-text-color: #FFF;
+  --button-hover-bg-color: #0056b3;
+  --button-active-bg-color: #004080;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #222;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 20px;
+  font-size: 1.5rem;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+button:active {
+  background-color: var(--button-active-bg-color);
+}
+
+button:focus {
+  outline: none;
+}
+
+#productTable {
+width: 70%;
+margin: 20px auto;
+border-collapse: collapse;
+}
+
+#productTable th, #productTable td {
+padding: 10px;
+border: 1px solid var(--primary-text-color);
+}
+
+#productTable th {
+background-color: var(--table-header-color);
+color: --primary-text-color;
+text-align: center;
+}
+
+#productTable td {
+background-color: var(--table-row-color);
+color: #000;
+text-align: center;
+}
+
+#productTable th:nth-child(1) {
+width: 10%;
+}
+
+#productTable th:nth-child(2) {
+width: 20%;
+}
+
+#productTable th:nth-child(3) {
+width: 60%;
+}
+
+#productTable th:nth-child(4) {
+  width: 10%;
+}
+  

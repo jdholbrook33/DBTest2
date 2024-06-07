@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="static/css/employee.css">
+    <script src="static/js/employee.js"></script>  
+    <script src="static/js/script.js"></script>  
+</head>
+<body>
+    <div class="container">
+        <h1>Employee Management</h1>
+        <form id="employeeForm">
+            <div class="form-row">
+                <label for="ID">ID:</label>
+                <input type="text" id="ID" name="ID" readonly>
+            </div>
+            <div class="form-row">
+                <label for="EmployeeID">Employee ID:</label>
+                <input type="text" id="EmployeeID" name="EmployeeID">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeName">Name:</label>
+                <input type="text" id="EmployeeName" name="EmployeeName">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeAddress">Address:</label>
+                <input type="text" id="EmployeeAddress" name="EmployeeAddress">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeCity">City:</label>
+                <input type="text" id="EmployeeCity" name="EmployeeCity">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeState">State:</label>
+                <input type="text" id="EmployeeState" name="EmployeeState">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeZipcode">Zipcode:</label>
+                <input type="text" id="EmployeeZipcode" name="EmployeeZipcode">
+            </div>
+            <div class="form-row">
+                <label for="EmployeePhone">Phone:</label>
+                <input type="text" id="EmployeePhone" name="EmployeePhone">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeEmail">Email:</label>
+                <input type="text" id="EmployeeEmail" name="EmployeeEmail">
+            </div>
+            <div class="form-row">
+                <label for="EmployeeActive">Active:</label>
+                <input type="checkbox" id="EmployeeActive" name="EmployeeActive">
+            </div>
+            <div class="button-container">
+                <div class="button-row search">
+                  <button type="button" id="searchButton" onclick="searchRecords()">Search</button>
+                  <input type="text" id="searchInput" name="searchInput" placeholder="Search...">
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="button-row navigation">
+                  <button type="button" id="prevButton" onclick="getPreviousRecord()">Prev</button>
+                  <button type="button" id="nextButton" onclick="getNextRecord()">Next</button>
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="button-row edit">
+                  <button type="button" id="newButton" onclick="createNewRecord()">New</button>
+                  <button type="button" id="editButton" onclick="editRecord()">Edit</button>
+                  <button type="button" id="saveButton" onclick="saveRecord()">Save</button>
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="button-row other">
+                  <button type="button" id="printButton" onclick="printRecord()">Print</button>
+                  <button type="button" id="clearButton" onclick="clearForm()">Clear</button>
+                  <button type="button" id="exitButton" class="exit" onclick="exit()">Exit</button>
+                </div>
+              </div>
+        </form>
+    </div>
+</body>
+</html>
