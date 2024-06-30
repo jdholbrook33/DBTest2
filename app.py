@@ -1,12 +1,13 @@
+# app.py
+
 from flask import Flask, render_template, request, redirect, session, jsonify
 import sqlite3
 from sqlite3 import Error
 import os
 
 app = Flask(__name__)
-app.secret_key = 'd652a2c8262ed583d62de8e72588cb2f'  # Replace with a secure secret key
+app.secret_key = 'd652a2c8262ed583d62de8e72588cb2f'
 
-# Connection to the SQLite Database
 def connect_db():
     database = os.path.join('data', 'CNC_DB.db')
     try:
@@ -23,10 +24,8 @@ def index():
 
 @app.route('/employee')
 def employee():
-    session['current_id'] = 1  # Reset to the first record when loading the page
+    session['current_id'] = 1
     return render_template('employee.html')
-
-
 
 @app.route('/dbData', methods=['GET'])
 def get_data():
@@ -46,8 +45,7 @@ def get_data():
         conn.close()
 
         if record:
-            # Convert the record to an array
-            record_data = list(record)
+            record_data = dict(record)
             return jsonify(record_data)
         else:
             return jsonify(None), 404
@@ -55,6 +53,37 @@ def get_data():
         print("Exception in get_data:", e)
         return jsonify({"error": str(e)}), 500
 
+@app.route('/search', methods=['GET'])
+def search():
+    try:
+        table = request.args.get('table')
+        search_term = request.args.get('term')
+        if not table or not search_term:
+            return jsonify({"error": "Missing table or search term"}), 400
+
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        # Get column names for the specified table
+        cursor.execute(f"PRAGMA table_info({table})")
+        columns = [column[1] for column in cursor.fetchall()]
+
+        # Construct a dynamic query based on the table's columns
+        search_conditions = " OR ".join([f"{col} LIKE ?" for col in columns])
+        query = f"SELECT * FROM {table} WHERE {search_conditions}"
+        
+        # Execute the query with search term for each column
+        cursor.execute(query, tuple(f'%{search_term}%' for _ in columns))
+        
+        records = cursor.fetchall()
+        conn.close()
+
+        records_data = [dict(zip(columns, record)) for record in records]
+        return jsonify(records_data)
+
+    except Exception as e:
+        print("Exception in search:", e)
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
