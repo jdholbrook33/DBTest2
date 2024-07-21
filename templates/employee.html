@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management</title>
     <link rel="stylesheet" href="static/css/employee.css">
-    <script src="static/js/baseManager.js"></script>  
-    <script src="static/js/employee.js"></script>  
+    <script src="static/js/employee.js"></script>
 </head>
 <body>
     <div class="container">
@@ -55,32 +54,36 @@
               <input type="date" id="DateOfHire" name="DateOfHire">
             </div>
             <div class="button-container">
-                <div class="button-row search">
-                  <button type="button" id="searchButton" onclick="searchRecords()">Search</button>
-                  <input type="text" id="searchInput" name="searchInput" placeholder="Search...">
-                </div>
+              <div class="button-row search">
+                  <input type="text" id="searchInput" placeholder="Search...">
+                  <button type="button" id="searchButton">Search</button>
               </div>
-              <div class="button-container">
-                <div class="button-row navigation">
-                  <button type="button" id="prevButton" onclick="getPreviousRecord()">Prev</button>
-                  <button type="button" id="nextButton" onclick="getNextRecord()">Next</button>
-                </div>
+          </div>
+          
+          <div class="button-container">
+              <div class="button-row navigation">
+                  <button type="button" id="prevButton">Prev</button>
+                  <button type="button" id="nextButton">Next</button>
               </div>
-              <div class="button-container">
-                <div class="button-row edit">
-                  <button type="button" id="newButton" onclick="createNewRecord()">New</button>
-                  <button type="button" id="editButton" onclick="editRecord()">Edit</button>
-                  <button type="button" id="saveButton" onclick="saveRecord()">Save</button>
-                </div>
+          </div>
+          
+          <div class="button-container">
+              <div class="button-row edit">
+                  <button type="button" id="newButton">New</button>
+                  <button type="button" id="editButton">Edit</button>
+                  <button type="button" id="saveButton">Save</button>
               </div>
-              <div class="button-container">
-                <div class="button-row other">
-                  <button type="button" id="printButton" onclick="printRecord()">Print</button>
-                  <button type="button" id="clearButton" onclick="clearForm()">Clear</button>
-                  <button type="button" id="exitButton" class="exit" onclick="exit()">Exit</button>
-                </div>
+          </div>
+          
+          <div class="button-container">
+              <div class="button-row other">
+                  <button type="button" id="printButton">Print</button>
+                  <button type="button" id="clearButton">Clear</button>
+                  <button type="button" id="exitButton">Exit</button>
               </div>
+          </div>
         </form>
     </div>
+    <script type="module" src="/static/js/employee.js"></script>
 </body>
 </html>

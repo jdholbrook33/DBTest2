@@ -52,6 +52,46 @@ def get_data():
     except Exception as e:
         print("Exception in get_data:", e)
         return jsonify({"error": str(e)}), 500
+    
+@app.route('/saveData', methods=['POST'])
+def save_data():
+    try:
+        data = request.json
+        table_name = data.get('table')
+        record_data = data.get('data')
+        operation = data.get('operation')  # 'insert' or 'update'
+
+        if not table_name or not record_data or not operation:
+            return jsonify({"error": "Missing required parameters", "status": "failure"}), 400
+
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        if operation == 'insert':
+            columns = ', '.join(record_data.keys())
+            placeholders = ', '.join('?' * len(record_data))
+            query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        elif operation == 'update':
+            set_clause = ', '.join([f"{key} = ?" for key in record_data.keys() if key != 'ID'])
+            query = f"UPDATE {table_name} SET {set_clause} WHERE ID = ?"
+        else:
+            return jsonify({"error": "Invalid operation", "status": "failure"}), 400
+
+        values = tuple(record_data.values())
+        if operation == 'update':
+            values = values[1:] + (record_data['ID'],)  # Move ID to the end for WHERE clause
+
+        cursor.execute(query, values)
+        conn.commit()
+        
+        new_id = cursor.lastrowid if operation == 'insert' else record_data['ID']
+        
+        conn.close()
+
+        return jsonify({"message": f"Record {'inserted' if operation == 'insert' else 'updated'} successfully", "id": new_id}), 200
+    except Exception as e:
+        print(f"Exception in save_data: {e}")
+        return jsonify({"error": str(e), "status": "failure"}), 500
 
 @app.route('/search', methods=['GET'])
 def search():
